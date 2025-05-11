@@ -1,15 +1,18 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/entrypoint.go",
-      "use": "@vercel/go"
+  "functions": {
+    "api/entrypoint.go": {
+      "includeFiles": "internal/**"
     }
-  ],
-  "trailingSlash": false,
+  },
+  "functions": {
+    "api/*.go": {
+      "includeFiles": "internal/**"
+    }
+  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/endpoint.go" }
-  ],
+    { "source": "/(.*)", "destination": "/api/entrypoint.go" }
+  ], 
   "headers": [
     {
       "source": "/api/(.*)",

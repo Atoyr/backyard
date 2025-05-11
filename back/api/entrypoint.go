@@ -7,18 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var (
-	app *gin.Engine
-)
-
-func myRoute(r *gin.RouterGroup) {
-	r.GET("/", handler.GetIndexHandler())
-}
+var app *gin.Engine
 
 func init() {
 	app = gin.New()
-	r := app.Group("/")
-	myRoute(r)
+	app.GET("/", handler.GetIndexHandler())
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
