@@ -5,11 +5,6 @@
       "includeFiles": "internal/**"
     }
   },
-  "functions": {
-    "api/*.go": {
-      "includeFiles": "internal/**"
-    }
-  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/entrypoint.go" }
   ], 
