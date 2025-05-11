@@ -1,4 +1,4 @@
-package main
+package m
 
 import (
 	"log"
@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
+func m() {
 	// Ginルーターの設定
 	r := gin.Default()
 

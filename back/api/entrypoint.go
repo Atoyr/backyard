@@ -13,7 +13,6 @@ var (
 
 func myRoute(r *gin.RouterGroup) {
 	r.GET("/", handler.GetIndexHandler())
-	r.GET("/todos", handler.GetTodosHandler())
 }
 
 func init() {
