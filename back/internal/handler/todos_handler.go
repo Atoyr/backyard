@@ -1,18 +1,20 @@
 package handler
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/atoyr/backyard/internal/models"
+	"github.com/gin-gonic/gin"
 )
 
-func TodosHandler(w http.ResponseWriter, r *http.Request) {
-	todos := []models.Todo{
-		{ID: 1, Title: "Todo 1"},
-		{ID: 2, Title: "Todo 2"},
-	}
+func GetTodosHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(todos)
+		todos := []models.Todo{
+			{ID: 1, Title: "Todo 1"},
+			{ID: 2, Title: "Todo 2"},
+		}
+
+		c.JSON(http.StatusOK, todos)
+	}
 }
