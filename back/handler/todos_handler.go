@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"github.com/atoyr/backyard/internal/models"
+	"github.com/atoyr/backyard/models"
 	"github.com/gin-gonic/gin"
 )
 

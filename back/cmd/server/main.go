@@ -1,18 +1,17 @@
-package m
+package main
 
 import (
 	"log"
 
-	"github.com/gin-gonic/gin"
+	"github.com/atoyr/backyard/api"
 )
 
-func m() {
-	// Ginルーターの設定
-	r := gin.Default()
+func main() {
+	app := api.GetApp()
 
 	// サーバー起動
 	log.Println("backend listening on :8080")
-	if err := r.Run(":8080"); err != nil {
+	if err := app.Run(":8080"); err != nil {
 		log.Fatal("server error:", err)
 	}
 }
