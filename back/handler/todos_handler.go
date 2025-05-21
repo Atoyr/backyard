@@ -10,7 +10,7 @@ import (
 func GetTodosHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		todos := []models.Todo{
+		todos := []models.Task{
 			{ID: 1, Title: "Todo 1"},
 			{ID: 2, Title: "Todo 2"},
 		}
