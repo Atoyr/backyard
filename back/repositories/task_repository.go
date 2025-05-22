@@ -12,7 +12,7 @@ type TaskRepository interface {
 	GetAllTasks() ([]models.Task, error)
 	CreateTask(title string) (models.Task, error)
 	UpdateTask(id int64, title string) (models.Task, error)
-	DeleteTask(id int64) (models.Task, error)
+	DeleteTask(id int64) error
 }
 
 type dbTaskRepository struct {
@@ -45,13 +45,47 @@ func (d *dbTaskRepository) GetAllTasks() ([]models.Task, error) {
 }
 
 func (d *dbTaskRepository) CreateTask(title string) (models.Task, error) {
-	panic("not implemented")
+	q := db.New(d.conn)
+	ctx := context.Background()
+	dbTask, err := q.CreateTask(ctx, title)
+	if err != nil {
+		return models.Task{}, err
+	}
+
+	task := models.Task{
+		ID:    dbTask.ID,
+		Title: dbTask.Title,
+		// Add other fields as necessary
+	}
+
+	return task, nil
 }
 
 func (d *dbTaskRepository) UpdateTask(id int64, title string) (models.Task, error) {
-	panic("not implemented")
+	q := db.New(d.conn)
+	ctx := context.Background()
+	err := q.UpdateTask(ctx, db.UpdateTaskParams{ID: id, Title: title})
+	if err != nil {
+		return models.Task{}, err
+	}
+
+	dbTask, err := q.GetTask(ctx, id)
+
+	if err != nil {
+		return models.Task{}, err
+	}
+
+	task := models.Task{
+		ID:    dbTask.ID,
+		Title: dbTask.Title,
+		// Add other fields as necessary
+	}
+
+	return task, nil
 }
 
-func (d *dbTaskRepository) DeleteTask(id int64) (models.Task, error) {
-	panic("not implemented")
+func (d *dbTaskRepository) DeleteTask(id int64) error {
+	q := db.New(d.conn)
+	ctx := context.Background()
+	return q.DeleteTask(ctx, id)
 }
