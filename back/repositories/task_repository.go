@@ -1,9 +1,11 @@
 package repositories
 
 import (
+	"context"
+
 	"github.com/atoyr/backyard/db"
 	"github.com/atoyr/backyard/models"
-	"github.com/jackc/pgx"
+	"github.com/jackc/pgx/v5"
 )
 
 type TaskRepository interface {
@@ -23,7 +25,7 @@ func NewTaskRepository(conn *pgx.Conn) TaskRepository {
 
 func (d *dbTaskRepository) GetAllTasks() ([]models.Task, error) {
 	q := db.New(d.conn)
-	ctx := d.conn.Context()
+	ctx := context.Background()
 	dbTasks, err := q.ListTasks(ctx)
 	if err != nil {
 		return nil, err
