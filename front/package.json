@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "preinstall": "npx only-allow pnpm",
+  "packageManager": "pnpm@8.15.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
