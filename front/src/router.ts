@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
-import TodosView from '@/pages/todos/index.vue'
-import Dashboard from '@/pages/dashboard/index.vue'
+import TodosView from '@/views/todos/index.vue'
+import Dashboard from '@/views/dashboard/index.vue'
 
 const routes = [
   { path: '/', component: TodosView },
