@@ -1,0 +1,8 @@
+query ListTasks($input: TasksRequestInput!) {
+  taskLists(input: $input) {
+    tasks {
+      id
+      title
+    }
+  }
+}

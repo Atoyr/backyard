@@ -1,0 +1,13 @@
+overwrite: true
+schema: 'FIXME'
+documents:
+  - ./src/**/*.graphql
+generates:
+  src/generates/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-vue-urql
+      - fragment-matcher
+    config:
+      withCompositionFunctions: true
