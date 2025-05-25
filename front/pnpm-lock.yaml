@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@urql/exchange-request-policy':
+    specifier: ^1.2.1
+    version: 1.2.1(@urql/core@5.1.1)
   '@urql/vue':
     specifier: ^1.4.3
     version: 1.4.3(@urql/core@5.1.1)(vue@3.5.14)
@@ -20,6 +23,9 @@ dependencies:
   vue-router:
     specifier: '4'
     version: 4.5.1(vue@3.5.14)
+  vuetify:
+    specifier: ^3.8.6
+    version: 3.8.6(typescript@5.8.3)(vue@3.5.14)
 
 devDependencies:
   '@graphql-codegen/cli':
@@ -1380,6 +1386,15 @@ packages:
       wonka: 6.3.5
     transitivePeerDependencies:
       - graphql
+    dev: false
+
+  /@urql/exchange-request-policy@1.2.1(@urql/core@5.1.1):
+    resolution: {integrity: sha512-sILFUp0UGcS2TLsTLhygw1sLk0ZlU7T3SuJd2fpW3o3oAHdn1EIuPrl5iWq0ce1yeVnMKqQeN1/9sjPPorg1iQ==}
+    peerDependencies:
+      '@urql/core': ^5.0.0
+    dependencies:
+      '@urql/core': 5.1.1(graphql@16.11.0)
+      wonka: 6.3.5
     dev: false
 
   /@urql/vue@1.4.3(@urql/core@5.1.1)(vue@3.5.14):
@@ -3294,6 +3309,26 @@ packages:
       '@vue/server-renderer': 3.5.14(vue@3.5.14)
       '@vue/shared': 3.5.14
       typescript: 5.8.3
+
+  /vuetify@3.8.6(typescript@5.8.3)(vue@3.5.14):
+    resolution: {integrity: sha512-WU7BrS0rKtewaU1e0SjJmUVc23k1Y9L5+aJdSmezAYlxYbHprlFVYeZZvwj1kA9xrPE8MGguvMQgePSxxD/l2w==}
+    engines: {node: ^12.20 || >=14.13}
+    peerDependencies:
+      typescript: '>=4.7'
+      vite-plugin-vuetify: '>=2.1.0'
+      vue: ^3.5.0
+      webpack-plugin-vuetify: '>=3.1.0'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      vite-plugin-vuetify:
+        optional: true
+      webpack-plugin-vuetify:
+        optional: true
+    dependencies:
+      typescript: 5.8.3
+      vue: 3.5.14(typescript@5.8.3)
+    dev: false
 
   /wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}

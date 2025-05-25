@@ -1,7 +1,20 @@
-// FIXME: this file is sqmple and should be removed in the future
-import { Client, cacheExchange, fetchExchange } from '@urql/vue';
+import { createClient, Client, cacheExchange, fetchExchange } from '@urql/vue';
+import { requestPolicyExchange } from '@urql/exchange-request-policy';
 
-export const client = new Client({
-  url: 'http://localhost:3000/graphql',
-  exchanges: [cacheExchange, fetchExchange],
-});
+export interface GraphQLClientOptions {
+  url: string;
+  cacheTTL?: number;
+}
+
+export const GraphQLClient = (options: GraphQLClientOptions): Client => {
+  return createClient({
+    url: options.url,
+    exchanges: [
+      requestPolicyExchange({
+        ttl: options.cacheTTL || 1000 * 60 * 5, // Default to 5 minutes
+      }), 
+      cacheExchange, 
+      fetchExchange, 
+    ],
+  });
+}
