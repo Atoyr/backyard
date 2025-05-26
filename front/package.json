@@ -11,7 +11,7 @@
     "build:local": "vite build --mode=local-dev",
     "build:watch": "vite build --mode=local-dev --watch",
     "preview": "vite preview",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen:local": "NODE_ENV=local-dev graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
@@ -25,6 +25,9 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.6",
+    "@graphql-codegen/fragment-matcher": "^5.1.0",
+    "@graphql-codegen/typescript-urql": "^4.0.1",
+    "@graphql-codegen/typescript-vue-urql": "^3.2.1",
     "@types/node": "^22.15.21",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
