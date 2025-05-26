@@ -6,3 +6,13 @@ query ListTasks($input: TasksRequestInput!) {
     }
   }
 }
+
+query ListIncompleteTasks($input: TasksRequestInput!) {
+  tasks(filter: { completed: false }, input: $input) {
+    tasks {
+      id
+      title
+      completed
+    }
+  }
+}
