@@ -3,6 +3,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@import "./themes.css";
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -120,4 +122,14 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+html {
+  color-scheme: light dark;
+}
+html.dark {
+  color-scheme: dark;
+}
+html.light {
+  color-scheme: light;
 }
