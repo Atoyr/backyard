@@ -2,7 +2,7 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 import { loadEnv } from 'vite';
 
 const mode = process.env.NODE_ENV || 'local-dev';
-const env = loadEnv(mode, process.cwd(), 'VITE_');
+const env = loadEnv(mode, process.cwd(), '');
 
 const supabaseUrl = env.VITE_SUPABASE_URL;
 const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY;

@@ -1,18 +1,11 @@
-query ListTasks($input: TasksRequestInput!) {
-  taskLists(input: $input) {
-    tasks {
-      id
-      title
-    }
-  }
-}
-
-query ListIncompleteTasks($input: TasksRequestInput!) {
-  tasks(filter: { completed: false }, input: $input) {
-    tasks {
-      id
-      title
-      completed
+query GetTasks {
+  tasksCollection{
+    edges{
+      node{
+        id
+        title
+        created_at
+      }
     }
   }
 }
