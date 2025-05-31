@@ -5,8 +5,9 @@ export interface Task {
   icon?: string;
   title: string;
   description?: string;
-  createdAt: string;
+  completed: boolean
+  createdAt?: Date;
+  updatedAt?: Date;
   status: Status;
-  isCompleted: boolean;
 }
 
