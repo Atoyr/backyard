@@ -13,7 +13,7 @@
     <!-- TODOリスト -->
     <div v-else-if="taskList.length > 0" class="space-y-2"
       v-for="todo in taskList" :key="todo.id" >
-      <TaskItem :task="todo" />
+      <div>{{ todo.title }}</div>
     </div>
 
     <!-- 空の状態 -->
@@ -36,11 +36,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
 const taskStore = useTaskStore()
-const { 
-  taskList, 
-  loading, 
-  error, 
-} = storeToRefs(taskStore)
+const { taskList, loading } = storeToRefs(taskStore)
 
 const { fetchTasks } = taskStore
 
