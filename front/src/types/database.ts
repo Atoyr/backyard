@@ -1,3 +1,14 @@
+// profiles
+export interface ProfileRow {
+  id: string
+  email: string
+  full_name?: string
+  avatar_url?: string
+  created_at: string
+  updated_at: string
+}
+
+// tasks
 export interface TaskRow {
   id: string
   title: string
@@ -24,6 +35,7 @@ export interface TaskUpdate {
   updated_at?: string
 }
 
+// Database schema
 export interface Database {
   public: {
     Tables: {

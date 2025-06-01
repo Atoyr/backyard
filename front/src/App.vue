@@ -1,12 +1,21 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <main>
     <RouterView />
   </main>
 </template>
+
+<script setup lang="ts">
+import HelloWorld from './components/HelloWorld.vue'
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
+
+onMounted(() => {
+  // 認証状態の監視を開始
+  authStore.initializeAuth()
+})
+</script>
 
 <style scoped>
 .logo {
