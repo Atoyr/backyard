@@ -1,6 +1,3 @@
--- RLS (Row Level Security) の設定
-
--- RLS の有効化
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 
 -- プロフィールテーブルのポリシー

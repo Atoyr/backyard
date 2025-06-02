@@ -1,6 +1,6 @@
 ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
 
--- TODOテーブルのポリシー
+-- tasksテーブルのポリシー
 CREATE POLICY "Users can view own tasks"
   ON tasks FOR SELECT
   USING (auth.uid() = user_id);
