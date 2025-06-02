@@ -7,30 +7,26 @@ INSERT INTO user_setting_groups (group_key, group_name, description, display_ord
 
 -- 設定定義の初期データを挿入
 INSERT INTO user_setting_definitions (
-    setting_key, group_key, setting_name, description, setting_type, 
-    default_value, validation_rules, display_order, is_required, is_system
+    setting_key, group_key, setting_name, 
+    description, setting_type, 
+    default_value, 
+    validation_rules, 
+    display_order, is_required, is_system
 ) VALUES
 -- 時間設定
 (
-    'day_start_hour', 'time', '開始時刻', 
-    '新しい日がスタートする時刻（0-23時）', 'range',
-    '2'::jsonb,
-    '{"min": 0, "max": 23, "step": 1}'::jsonb,
-    1, true, true
-),
-(
-    'max_hour', 'time', '最大時刻', 
-    '1日の最大時刻（24-48時）', 'range',
+    'max_hour', 'time', '時刻', 
+    '1日の終わる時間', 'range',
     '29'::jsonb,
     '{"min": 24, "max": 48, "step": 1}'::jsonb,
-    2, true, true
+    1, true, true
 ),
 (
     'timezone', 'time', 'タイムゾーン', 
     'タイムゾーンの設定', 'select',
     '"Asia/Tokyo"'::jsonb,
     '{"options": ["Asia/Tokyo", "Asia/Seoul", "America/New_York", "Europe/London", "UTC"]}'::jsonb,
-    3, true, true
+    2, true, true
 ),
 
 -- 表示設定
