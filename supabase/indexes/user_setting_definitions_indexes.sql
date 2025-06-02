@@ -1,0 +1,3 @@
+CREATE INDEX idx_user_setting_definitions_key ON user_setting_definitions(setting_key);
+CREATE INDEX idx_user_setting_definitions_group ON user_setting_definitions(group_key);
+
