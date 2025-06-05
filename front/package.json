@@ -6,10 +6,10 @@
   "preinstall": "npx only-allow pnpm",
   "packageManager": "pnpm@8.15.0",
   "scripts": {
-    "dev": "vite --mode=local-dev",
+    "dev": "vite --mode=dev",
     "build": "vue-tsc -b && vite build",
-    "build:local": "vite build --mode=local-dev",
-    "build:watch": "vite build --mode=local-dev --watch",
+    "build:dev": "vite build --mode=dev",
+    "build:dev:watch": "vite build --mode=dev --watch",
     "preview": "vite preview"
   },
   "dependencies": {
