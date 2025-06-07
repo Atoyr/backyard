@@ -1,5 +1,26 @@
--- 初期スキーマ: プロフィールテーブルとTODOテーブルの作成
+-- 初期スキーマ
 
+-- ENUM ----------------------------------------------------
+-- 優先度のENUM型を定義
+do $$
+begin
+  if not exists (select 1 from pg_type where typname = 'priority_level') then
+    -- priority_level ENUM型が存在しない場合にのみ作成
+    CREATE TYPE priority_level AS ENUM ('high', 'medium', 'low');
+  end if;
+end $$;
+
+-- タスクステータスのENUM型を定義
+do $$
+begin
+  if not exists (select 1 from pg_type where typname = 'task_status') then
+    -- task_status ENUM型が存在しない場合にのみ作成
+    CREATE TYPE task_status AS ENUM ('todo', 'doing', 'done', 'pending', 'archived');
+  end if;
+end $$;
+
+
+-- TABLE ----------------------------------------------------
 -- プロフィールテーブルの作成
 CREATE TABLE IF NOT EXISTS profiles (
   id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
@@ -9,12 +30,6 @@ CREATE TABLE IF NOT EXISTS profiles (
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
-
--- 優先度のENUM型を定義
-CREATE TYPE priority_level AS ENUM ('high', 'medium', 'low');
-
--- タスクステータスのENUM型を定義
-CREATE TYPE task_status AS ENUM ('todo', 'doing', 'done', 'pending', 'archived');
 
 -- tasksテーブルの作成
 CREATE TABLE IF NOT EXISTS tasks (
@@ -38,7 +53,7 @@ CREATE TABLE IF NOT EXISTS tasks (
 );
 
 -- タスクタグテーブル
-CREATE TABLE task_tags (
+CREATE TABLE IF NOT EXISTS task_tags (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
   task_id UUID NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
@@ -50,7 +65,7 @@ CREATE TABLE task_tags (
 );
 
 -- ユーザー設定テーブルを作成
-CREATE TABLE user_settings (
+CREATE TABLE IF NOT EXISTS user_settings (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
     setting_key VARCHAR(100) NOT NULL,
@@ -66,7 +81,7 @@ CREATE TABLE user_settings (
 );
 
 -- 設定グループテーブル（設定の分類管理）
-CREATE TABLE user_setting_groups (
+CREATE TABLE IF NOT EXISTS user_setting_groups (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     group_key VARCHAR(100) NOT NULL UNIQUE,
     group_name VARCHAR(200) NOT NULL,
@@ -77,7 +92,7 @@ CREATE TABLE user_setting_groups (
 );
 
 -- 設定定義テーブル（設定項目のメタデータ）
-CREATE TABLE user_setting_definitions (
+CREATE TABLE IF NOT EXISTS user_setting_definitions (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     setting_key VARCHAR(100) NOT NULL UNIQUE,
     group_key VARCHAR(100) REFERENCES user_setting_groups(group_key) ON DELETE SET NULL,
@@ -106,25 +121,25 @@ END;
 $$ language 'plpgsql';
 
 -- プロフィールテーブルの更新トリガー
-CREATE TRIGGER update_profiles_updated_at
+CREATE OR REPLACE TRIGGER update_profiles_updated_at
   BEFORE UPDATE ON profiles
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
 -- taskテーブルの更新トリガー
-CREATE TRIGGER update_tasks_updated_at
+CREATE OR REPLACE TRIGGER update_tasks_updated_at
   BEFORE UPDATE ON tasks
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
 -- ユーザー設定テーブルの更新トリガー
-CREATE TRIGGER update_user_settings_updated_at 
+CREATE OR REPLACE TRIGGER update_user_settings_updated_at 
   BEFORE UPDATE ON user_settings 
   FOR EACH ROW 
   EXECUTE FUNCTION update_updated_at_column();
 
 -- user_setting_definitionsテーブルの更新トリガー
-CREATE TRIGGER update_user_setting_definitions_updated_at 
+CREATE OR REPLACE TRIGGER update_user_setting_definitions_updated_at 
   BEFORE UPDATE ON user_setting_definitions 
   FOR EACH ROW 
   EXECUTE FUNCTION update_updated_at_column();
@@ -245,7 +260,7 @@ $$ LANGUAGE plpgsql;
 
 
 -- 新規ユーザー登録時に自動でデフォルト設定を作成
-CREATE TRIGGER on_auth_user_created
+CREATE OR REPLACE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW 
   EXECUTE FUNCTION create_default_user_settings();

@@ -1,3 +1,4 @@
+TRUNCATE TABLE user_setting_groups, user_setting_definitions CASCADE;
 
 INSERT INTO user_setting_groups (group_key, group_name, description, display_order, is_system) VALUES
 ('time', '時間設定', '拡張時間システムの設定', 1, true),
