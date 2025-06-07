@@ -39,13 +39,14 @@ CREATE TABLE IF NOT EXISTS tasks (
 
 -- タスクタグテーブル
 CREATE TABLE task_tags (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    task_id UUID NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
-    tag_name VARCHAR(50) NOT NULL,
-    color VARCHAR(7) DEFAULT '#6366f1', -- HEXカラーコード
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    
-    UNIQUE(task_id, tag_name)
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  task_id UUID NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
+  tag_name VARCHAR(50) NOT NULL,
+  color VARCHAR(7) DEFAULT '#6366f1', -- HEXカラーコード
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  
+  UNIQUE(task_id, tag_name)
 );
 
 -- ユーザー設定テーブルを作成
