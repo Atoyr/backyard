@@ -1,9 +1,9 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import TodosView from '@/views/todos/index.vue'
-import Dashboard from '@/views/dashboard/index.vue'
-import Login from '@/views/login/index.vue'
-import AuthCallback from '@/views/authCallback/index.vue'
+import TodosView from '@/pages/todos/index.vue'
+import Dashboard from '@/pages/dashboard/index.vue'
+import Login from '@/pages/login/index.vue'
+import AuthCallback from '@/pages/authCallback/index.vue'
 
 const routes = [
   { path: '/', component: TodosView, meta: { requiresAuth: true } },
