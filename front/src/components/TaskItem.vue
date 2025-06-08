@@ -19,12 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import type { Task } from '@/types/task'
-
-interface Props {
-  task: Task
-}
 
 const formatDate = (dateString?: string) => {
   if (!dateString) return ''

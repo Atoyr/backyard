@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
 import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 

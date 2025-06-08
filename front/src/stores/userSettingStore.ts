@@ -7,5 +7,7 @@ type State = {
 }
 
 export const useUserSettingStore = defineStore('userSettings', {
-
+  state: (): State => ({
+    setting: null
+  })
 })

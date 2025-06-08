@@ -32,7 +32,6 @@
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTaskStore } from '@/stores/taskStore'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
 const taskStore = useTaskStore()
