@@ -31,8 +31,6 @@ export const useTaskStore = defineStore('tasks', {
         if (supabaseError) {
           throw supabaseError
         }
-        console.log('Fetched tasks:', data);
-
         
         this.taskList = data.map(transformTaskRowToModel);
       } catch (err) {
@@ -41,7 +39,33 @@ export const useTaskStore = defineStore('tasks', {
       } finally {
         this.loading = false
       }
-    }
+    },
+    async createTask(newTask: Omit<Task, 'id' | 'created_at'>) {
+      this.loading = true
+      this.error = null
+
+      try {
+        const { data, error: createError } = await supabase
+          .from('tasks')
+          .insert([{
+            title: newTask.title,
+            description: newTask.description,
+            due_date: newTask.dueDate,
+            completed: false
+          }])
+          .select()
+          .single()
+
+          if (createError) throw createError
+          
+          this.taskList.unshift(data)
+          return data
+      } catch (err) {
+        this.error = err instanceof Error ? err.message : 'TODOの登録に失敗しました'
+      } finally {
+        this.loading = false
+      }
+    }, 
   }
 });
 
